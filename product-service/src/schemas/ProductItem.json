@@ -1,0 +1,28 @@
+{
+    "title": "Product Item Schema",
+    "description": "This is a schema for responses in the JSON API format. For more, see http://jsonapi.org",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "example": "7567ec4b-b10c-48c5-9345-fc73c48a80aa"
+        },
+        "count": {
+            "type": "number",
+            "example": 6
+        },
+        "description": {
+            "type": "string",
+            "example": "Nice Product 1"
+        },
+        "price": {
+            "type": "number",
+            "example": 20
+        },
+        "title": {
+            "type": "string",
+            "example": "Nice Product 1"
+        }
+    },
+    "additionalProperties": false
+}

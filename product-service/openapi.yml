@@ -1,0 +1,105 @@
+openapi: 3.0.0
+components:
+  schemas:
+    ProductItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 7567ec4b-b10c-48c5-9345-fc73c48a80aa
+        count:
+          type: number
+          example: 6
+        description:
+          type: string
+          example: Nice Product 1
+        price:
+          type: number
+          example: 20
+        title:
+          type: string
+          example: Nice Product 1
+    ProductItemsArray:
+      title: Product Items Schema
+      description: >-
+        This is a schema for responses in the JSON API format. For more, see
+        http://jsonapi.org
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductItem'
+      additionalProperties: false
+      default:
+        title: Product Items Schema
+        description: >-
+          This is a schema for responses in the JSON API format. For more, see
+          http://jsonapi.org
+        properties:
+          products:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProductItem'
+        definitions:
+          ProductItem:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 7567ec4b-b10c-48c5-9345-fc73c48a80aa
+              count:
+                type: number
+                example: 6
+              description:
+                type: string
+                example: Nice Product 1
+              price:
+                type: number
+                example: 20
+              title:
+                type: string
+                example: Nice Product 1
+        additionalProperties: false
+info:
+  title: Product Service API
+  description: Simple API to get products
+  version: 1.0.0
+paths:
+  /products:
+    get:
+      operationId: getAllProducts
+      summary: get all available products
+      description: get all available products
+      parameters: []
+      responses:
+        '200':
+          description: all available products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductItemsArray'
+        '500':
+          description: all available products
+          content: {}
+  '/products/{productId}':
+    get:
+      operationId: getProductById
+      summary: get product by id
+      description: get products by id
+      parameters:
+        - name: id
+          in: path
+          description: uuid of the product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: specific product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductItem'
+        '404':
+          description: Product with such id not found
+          content: {}

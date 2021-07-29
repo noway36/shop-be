@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit test for getAllProducts handler should return all available products 1`] = `
+Object {
+  "count": 4,
+  "description": "Nice Product 1",
+  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
+  "price": 2.4,
+  "title": "Nice Product 1",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 2`] = `
+Object {
+  "count": 6,
+  "description": "Nice Product 2",
+  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a0",
+  "price": 10,
+  "title": "Nice Product 2",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 3`] = `
+Object {
+  "count": 7,
+  "description": "Nice Product 3",
+  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a2",
+  "price": 23,
+  "title": "Nice Product 3",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 4`] = `
+Object {
+  "count": 12,
+  "description": "Nice Product 4",
+  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a1",
+  "price": 15,
+  "title": "Nice Product 4",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 5`] = `
+Object {
+  "count": 7,
+  "description": "Nice Product 5",
+  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a3",
+  "price": 23,
+  "title": "Nice Product 5",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 6`] = `
+Object {
+  "count": 8,
+  "description": "Nice Product 6",
+  "id": "7567ec4b-b10c-48c5-9345-fc73348a80a1",
+  "price": 15,
+  "title": "Nice Product 6",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 7`] = `
+Object {
+  "count": 2,
+  "description": "Nice Product 7",
+  "id": "7567ec4b-b10c-48c5-9445-fc73c48a80a2",
+  "price": 23,
+  "title": "Nice Product 7",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return all available products 8`] = `
+Object {
+  "count": 3,
+  "description": "Nice Product 8",
+  "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+  "price": 15,
+  "title": "Nice Product 8",
+}
+`;
