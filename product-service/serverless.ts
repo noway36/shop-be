@@ -5,6 +5,10 @@ import * as ProductItemsArraySchema from '@schemas/ProductItemsArray.json';
 
 import getAllProducts from '@functions/get-all-products';
 import getProductById from '@functions/get-product-by-id';
+import addProduct from '@functions/add-product';
+import deleteProductById from '@functions/delete-product-by-id';
+
+import * as Config from './src/config';
 
 const serverlessConfiguration: AWS = {
     service: 'product-service',
@@ -45,10 +49,15 @@ const serverlessConfiguration: AWS = {
         },
         environment: {
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+            PG_HOST: Config.DATABASE.HOST,
+            PG_PORT: String(Config.DATABASE.PORT),
+            PG_DATABASE: Config.DATABASE.NAME,
+            PG_USERNAME: Config.DATABASE.USER,
+            PG_PASSWORD: Config.DATABASE.PASS,
         },
         lambdaHashingVersion: '20201221',
     },
-    functions: { getAllProducts, getProductById },
+    functions: { getAllProducts, getProductById, addProduct, deleteProductById },
 };
 
 module.exports = serverlessConfiguration;

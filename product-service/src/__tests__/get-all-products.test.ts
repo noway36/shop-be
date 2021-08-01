@@ -18,11 +18,10 @@ describe('Unit test for getAllProducts handler', () => {
         expect(Array.isArray(products)).toEqual(true);
     });
 
-    it('should return all available products', async () => {
+    it('should return proper products', async () => {
         const result = (await getAllProducts(event as APIGatewayProxyEvent, ctx, cb)) as APIGatewayProxyResult;
         const products: IProduct[] = JSON.parse(result.body).products;
 
-        expect(products.length).toEqual(PRODUCT_BY_ID_MAP.size);
         products.forEach(product => {
             expect(product).toMatchSnapshot({ ...PRODUCT_BY_ID_MAP.get(product.id) });
         });

@@ -1,81 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Unit test for getAllProducts handler should return all available products 1`] = `
+exports[`Unit test for getAllProducts handler should return proper products 1`] = `
 Object {
   "count": 4,
   "description": "Nice Product 1",
-  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
-  "price": 2.4,
+  "id": "9a14812c-07e1-463e-9fa1-1a5179f48e61",
+  "price": 2,
   "title": "Nice Product 1",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 2`] = `
+exports[`Unit test for getAllProducts handler should return proper products 2`] = `
 Object {
   "count": 6,
   "description": "Nice Product 2",
-  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a0",
+  "id": "164032bb-6512-4d5b-aae8-313fc365f012",
   "price": 10,
   "title": "Nice Product 2",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 3`] = `
+exports[`Unit test for getAllProducts handler should return proper products 3`] = `
 Object {
   "count": 7,
   "description": "Nice Product 3",
-  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a2",
+  "id": "b3595014-634c-4b47-8250-cce3867d4919",
   "price": 23,
   "title": "Nice Product 3",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 4`] = `
+exports[`Unit test for getAllProducts handler should return proper products 4`] = `
 Object {
   "count": 12,
   "description": "Nice Product 4",
-  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a1",
+  "id": "504e5779-c1bc-4498-a792-3b12839b4a7d",
   "price": 15,
   "title": "Nice Product 4",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 5`] = `
+exports[`Unit test for getAllProducts handler should return proper products 5`] = `
 Object {
   "count": 7,
   "description": "Nice Product 5",
-  "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a3",
+  "id": "e7a1919b-0bb8-4511-980b-553a332be219",
   "price": 23,
   "title": "Nice Product 5",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 6`] = `
+exports[`Unit test for getAllProducts handler should return proper products 6`] = `
 Object {
   "count": 8,
   "description": "Nice Product 6",
-  "id": "7567ec4b-b10c-48c5-9345-fc73348a80a1",
+  "id": "00e95255-4243-426c-93e7-b9504a8bff89",
   "price": 15,
   "title": "Nice Product 6",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 7`] = `
+exports[`Unit test for getAllProducts handler should return proper products 7`] = `
 Object {
   "count": 2,
   "description": "Nice Product 7",
-  "id": "7567ec4b-b10c-48c5-9445-fc73c48a80a2",
+  "id": "c2f464aa-a291-435d-b465-f35c5466f19c",
   "price": 23,
   "title": "Nice Product 7",
 }
 `;
 
-exports[`Unit test for getAllProducts handler should return all available products 8`] = `
+exports[`Unit test for getAllProducts handler should return proper products 8`] = `
 Object {
   "count": 3,
   "description": "Nice Product 8",
-  "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+  "id": "00345b0c-d0fb-4076-836b-b67c715f3a4e",
   "price": 15,
   "title": "Nice Product 8",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 9`] = `
+Object {
+  "count": 59,
+  "description": "Nice Product 9",
+  "id": "8db0532c-6ca2-4abd-8619-e49f84571141",
+  "price": 9,
+  "title": "Nice Product 9",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 10`] = `
+Object {
+  "count": 3,
+  "description": "Nice Product 10",
+  "id": "f0f4cccd-82a4-4fde-8586-a3a0df915fd6",
+  "price": 123,
+  "title": "Nice Product 10",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 11`] = `
+Object {
+  "count": 33,
+  "description": "Nice Product 11",
+  "id": "bf6086a8-0dea-4cec-95a2-e8057cdb6176",
+  "price": 5,
+  "title": "Nice Product 11",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 12`] = `
+Object {
+  "count": 1,
+  "description": "Nice Product 12",
+  "id": "5615ec40-8b88-454b-9389-3a3d8cfaa32c",
+  "price": 109,
+  "title": "Nice Product 12",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 13`] = `
+Object {
+  "count": 5,
+  "description": "Nice Product 13",
+  "id": "26424be3-8749-4db2-a753-d0847c0c41d5",
+  "price": 322,
+  "title": "Nice Product 13",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 14`] = `
+Object {
+  "count": 666,
+  "description": "Nice Product 14",
+  "id": "77d41be9-e998-4961-8c4d-ccf82807f024",
+  "price": 666,
+  "title": "Nice Product 14",
+}
+`;
+
+exports[`Unit test for getAllProducts handler should return proper products 15`] = `
+Object {
+  "count": 6,
+  "description": "Nice Product 15",
+  "id": "b5942060-a9d2-42ff-8a16-5bf8462a119a",
+  "price": 2,
+  "title": "Nice Product 15",
 }
 `;
