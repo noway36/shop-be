@@ -37,3 +37,17 @@ export class ErrorResponse {
         this.headers = DEFAULT_HEADERS;
     }
 }
+
+export function logRequestData<T = void>(
+    event: APIGatewayProxyEvent | ValidatedAPIGatewayProxyEvent<T>,
+    lambdaModule: string,
+) {
+    const logInfo = {
+        module: lambdaModule,
+        method: event.httpMethod,
+        pathParams: event.pathParameters,
+        body: event.body,
+    };
+
+    console.log(JSON.stringify(logInfo));
+}

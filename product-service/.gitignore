@@ -10,3 +10,6 @@ coverage
 
 # Webpack directories
 .webpack
+
+# ENV
+.env
