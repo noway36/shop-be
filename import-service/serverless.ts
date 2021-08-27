@@ -3,7 +3,7 @@ import type { AWS } from '@serverless/typescript';
 import importProductsFile from '@functions/importProductsFile';
 import importFileParser from '@functions/importFileParser';
 
-import { BUCKET } from 'src/constants';
+import { BUCKET, SQS_QUEUE_NAME } from 'src/constants';
 
 const serverlessConfiguration: AWS = {
     service: 'import-service',
@@ -25,6 +25,9 @@ const serverlessConfiguration: AWS = {
         },
         environment: {
             AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+            SQS_URL: {
+                Ref: 'SQSQueue',
+            },
         },
         lambdaHashingVersion: '20201221',
         iam: {
@@ -40,36 +43,64 @@ const serverlessConfiguration: AWS = {
                         Action: 's3:*',
                         Resource: [`arn:aws:s3:::${BUCKET}/*`],
                     },
+                    {
+                        Effect: 'Allow',
+                        Action: 'sqs:*',
+                        Resource: [
+                            {
+                                'Fn::GetAtt': ['SQSQueue', 'Arn'],
+                            },
+                        ],
+                    },
                 ],
             },
         },
     },
-    // resources: {
-    //     Resources: {
-    //         importServiceBucket: {
-    //             Type: 'AWS::S3::Bucket',
-    //             Properties: {
-    //                 BucketName: BUCKET,
-    //                 CorsConfiguration: {
-    //                     CorsRules: [
-    //                         {
-    //                             AllowedMethods: ['GET', 'PUT'],
-    //                             AllowedHeaders: ['*'],
-    //                             AllowedOrigins: ['*'],
-    //                         },
-    //                     ],
-    //                 },
-    //             },
-    //         },
-    //     },
-    //     Outputs: {
-    //         importServiceBucketOutput: {
-    //             Value: {
-    //                 Ref: 'importServiceBucket',
-    //             },
-    //         },
-    //     },
-    // },
+    resources: {
+        Resources: {
+            ImportServiceBucket: {
+                Type: 'AWS::S3::Bucket',
+                Properties: {
+                    BucketName: BUCKET,
+                    AccessControl: 'PublicRead',
+                    CorsConfiguration: {
+                        CorsRules: [
+                            {
+                                AllowedMethods: ['GET', 'PUT'],
+                                AllowedHeaders: ['*'],
+                                AllowedOrigins: ['*'],
+                            },
+                        ],
+                    },
+                },
+            },
+            ImportServiceBucketPolicy: {
+                Type: 'AWS::S3::BucketPolicy',
+                Properties: {
+                    Bucket: {
+                        Ref: 'ImportServiceBucket',
+                    },
+                    PolicyDocument: {
+                        Statement: [
+                            {
+                                Sid: 'AllowPublicRead',
+                                Effect: 'Allow',
+                                Principal: { AWS: '*' },
+                                Action: 's3:GetObject',
+                                Resource: `arn:aws:s3:::${BUCKET}/*`,
+                            },
+                        ],
+                    },
+                },
+            },
+            SQSQueue: {
+                Type: 'AWS::SQS::Queue',
+                Properties: {
+                    QueueName: SQS_QUEUE_NAME,
+                },
+            },
+        },
+    },
     functions: { importProductsFile, importFileParser },
 };
 
