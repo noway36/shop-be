@@ -10,3 +10,5 @@ export const DATABASE = {
     PASS: process.env.PG_PASSWORD ?? '',
     TIMEOUT: Number(process.env.PG_TIMEOUT) ?? 60000,
 };
+
+export const SNS_ARN = process.env.SNS_ARN ?? '';

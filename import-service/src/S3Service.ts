@@ -2,6 +2,7 @@ import { S3Event } from 'aws-lambda';
 import * as AwsSdk from 'aws-sdk';
 import csvParser from 'csv-parser';
 
+import { SQS_URL } from './config';
 import { BUCKET, CsvFileFolder } from './constants';
 
 const s3Config = { signatureVersion: 'v4', region: 'eu-west-1' };
@@ -13,9 +14,11 @@ interface IS3Service {
 
 class S3Service implements IS3Service {
     private readonly s3: AwsSdk.S3;
+    private readonly sqs: AwsSdk.SQS;
 
     constructor() {
         this.s3 = new AwsSdk.S3(s3Config);
+        this.sqs = new AwsSdk.SQS();
     }
 
     public async getSignedUrlPromise(fileName: string): Promise<string> {
@@ -37,7 +40,25 @@ class S3Service implements IS3Service {
 
         s3ReadStream
             .pipe(csvParser())
-            .on('data', data => console.log(`file chunk: ${JSON.stringify(data)}`))
+            .on('data', data => {
+                const fileChunk = JSON.stringify(data);
+                console.log(`file chunk: ${fileChunk}`);
+                this.sqs.sendMessage(
+                    {
+                        QueueUrl: SQS_URL,
+                        MessageBody: fileChunk,
+                    },
+                    (error, resData) => {
+                        if (error != null) {
+                            console.log(`failed to send message to queue ${SQS_URL}: ${error}`);
+                        } else {
+                            console.log(
+                                `the message was successfully sent to the queue ${SQS_URL}: ${JSON.stringify(resData)}`,
+                            );
+                        }
+                    },
+                );
+            })
             .on('end', async () => {
                 await this.copyObject(event, CsvFileFolder.Uploaded, CsvFileFolder.Parsed);
                 await this.deleteObject(event);

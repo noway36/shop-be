@@ -7,8 +7,10 @@ import getAllProducts from '@functions/get-all-products';
 import getProductById from '@functions/get-product-by-id';
 import addProduct from '@functions/add-product';
 import deleteProductById from '@functions/delete-product-by-id';
+import catalogBatchProcess from '@functions/catalog-batch-process';
 
 import * as Config from './src/config';
+import { SNS_TOPIC_NAME } from 'src/constants';
 
 const serverlessConfiguration: AWS = {
     service: 'product-service',
@@ -54,10 +56,60 @@ const serverlessConfiguration: AWS = {
             PG_DATABASE: Config.DATABASE.NAME,
             PG_USERNAME: Config.DATABASE.USER,
             PG_PASSWORD: Config.DATABASE.PASS,
+            SNS_ARN: {
+                Ref: 'SNSTopic',
+            },
+        },
+        iam: {
+            role: {
+                statements: [
+                    {
+                        Effect: 'Allow',
+                        Action: 'sns:*',
+                        Resource: { Ref: 'SNSTopic' },
+                    },
+                ],
+            },
         },
         lambdaHashingVersion: '20201221',
     },
-    functions: { getAllProducts, getProductById, addProduct, deleteProductById },
+    resources: {
+        Resources: {
+            SNSTopic: {
+                Type: 'AWS::SNS::Topic',
+                Properties: {
+                    TopicName: SNS_TOPIC_NAME,
+                },
+            },
+            SNSSubscriptionSmallAmountOfProducts: {
+                Type: 'AWS::SNS::Subscription',
+                Properties: {
+                    Endpoint: 'alexander.dren36@gmail.com',
+                    Protocol: 'email',
+                    TopicArn: {
+                        Ref: 'SNSTopic',
+                    },
+                    FilterPolicy: {
+                        stock: [{ numeric: ['<', 10] }],
+                    },
+                },
+            },
+            SNSSubscriptionPlentyOfProducts: {
+                Type: 'AWS::SNS::Subscription',
+                Properties: {
+                    Endpoint: 'alexander.dren36+testuser1@gmail.com',
+                    Protocol: 'email',
+                    TopicArn: {
+                        Ref: 'SNSTopic',
+                    },
+                    FilterPolicy: {
+                        stock: [{ numeric: ['>=', 10] }],
+                    },
+                },
+            },
+        },
+    },
+    functions: { getAllProducts, getProductById, addProduct, deleteProductById, catalogBatchProcess },
 };
 
 module.exports = serverlessConfiguration;

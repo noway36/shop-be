@@ -10,4 +10,5 @@ export enum CsvFileFolder {
     Parsed = 'parsed',
 }
 
-export const BUCKET = 'import-service-products-files';
+export const BUCKET = 'import-service-products-files-v2';
+export const SQS_QUEUE_NAME = 'catalogItemsQueue';
