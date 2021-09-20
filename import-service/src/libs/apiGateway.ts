@@ -1,4 +1,5 @@
 import type { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda';
+import { HttpHeaders } from 'aws-sdk/clients/iot';
 import type { FromSchema } from 'json-schema-to-ts';
 
 import { HttpCode } from 'src/constants';
@@ -9,11 +10,12 @@ export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayP
 interface IResponse {
     statusCode: HttpCode;
     body: string;
-    headers: { [k: string]: string };
+    headers: HttpHeaders;
 }
 
 const DEFAULT_HEADERS = {
     'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
 };
 
 export const formatJSONResponse = (response: Record<string, unknown>): IResponse => {
@@ -25,11 +27,9 @@ export const formatJSONResponse = (response: Record<string, unknown>): IResponse
 };
 
 export class ErrorResponse {
-    public statusCode: HttpCode;
-    public body: string;
-    public headers: {
-        [k: string]: string;
-    };
+    public statusCode: IResponse['statusCode'];
+    public body: IResponse['body'];
+    public headers: IResponse['headers'];
 
     constructor(message = 'Something went wrong', statusCode = HttpCode.InternalServerError) {
         this.statusCode = statusCode;
